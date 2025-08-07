@@ -1,0 +1,55 @@
+# Modified version of .gitignore created by https://www.toptal.com/developers/gitignore/api/java,maven,intellij,windows
+
+# Java #
+*.class
+*.log
+*.ctxt
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# JVM crash logs
+hs_err_pid*
+replay_pid*
+
+# Maven #
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Eclipse #
+.project
+.classpath
+
+# IntelliJ IDEA #
+.idea/
+*.iml
+
+# Windows #
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
