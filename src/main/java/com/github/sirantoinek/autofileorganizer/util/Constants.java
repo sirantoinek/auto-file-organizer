@@ -1,10 +1,15 @@
 package com.github.sirantoinek.autofileorganizer.util;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
+
 
 public class Constants
 {
     private Constants() {}
+
+    // Date format
+    public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM");
 
     // Folder names
     public static final String DOCUMENTS_FOLDER = "Documents";
