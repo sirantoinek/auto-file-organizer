@@ -47,12 +47,14 @@ class FileAnalyzerTest
             java.nio.file.Files.setLastModifiedTime(tempFile, modifyTime1);
 
             String modifyDate1 = FileAnalyzer.getFileModifyDate(tempFile);
+
             assertEquals("2021-07", modifyDate1);
 
             FileTime modifyTime2 = java.nio.file.attribute.FileTime.fromMillis(1673740800000L); // January 15, 2023
             java.nio.file.Files.setLastModifiedTime(tempFile, modifyTime2);
 
             String modifyDate2 = FileAnalyzer.getFileModifyDate(tempFile);
+
             assertEquals("2023-01", modifyDate2);
         }
         finally

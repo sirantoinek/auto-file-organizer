@@ -1,5 +1,7 @@
 package com.github.sirantoinek.autofileorganizer.util;
 
+import org.apache.commons.io.filefilter.*;
+import org.apache.commons.io.IOCase;
 import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
@@ -43,5 +45,20 @@ public class Constants
 
     public static final Set<String> EXECUTABLE_EXTENSIONS = Set.of(
             "exe", "dll", "msi", "bat", "cmd", "com", "scr", "sys", "elf", "app", "jar", "apk", "ipa"
+    );
+
+    // blacklist of folders to ignore in FileUtils.listFiles() (used in FileScanner)
+    public static final IOFileFilter DIRECTORY_BLACKLIST = new NotFileFilter(
+            new OrFileFilter(
+                    new PrefixFileFilter("."), // Unix hidden folders
+                    new NameFileFilter("Organized", IOCase.INSENSITIVE), // Organized folder
+                    new NameFileFilter("$Recycle.Bin", IOCase.INSENSITIVE),
+                    new NameFileFilter("Program Files", IOCase.INSENSITIVE),
+                    new NameFileFilter("Program Files (x86)", IOCase.INSENSITIVE),
+                    new NameFileFilter("System Volume Information", IOCase.INSENSITIVE),
+                    new NameFileFilter("Windows", IOCase.INSENSITIVE),
+                    new NameFileFilter("AppData", IOCase.INSENSITIVE),
+                    new NameFileFilter("Temp", IOCase.INSENSITIVE)
+            )
     );
 }
