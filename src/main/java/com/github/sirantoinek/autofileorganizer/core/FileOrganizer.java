@@ -80,8 +80,8 @@ public class FileOrganizer
         if (byDate)
         {
             YearMonth modifyDate = YearMonth.parse(FileAnalyzer.getFileModifyDate(file));
-            String year = String.valueOf(modifyDate.getYear());
-            String month = String.valueOf(modifyDate.getMonthValue());
+            String year = String.format("%04d", modifyDate.getYear());
+            String month = String.format("%02d", modifyDate.getMonthValue());
 
             targetDir = targetDir.resolve(year).resolve(month);
         }

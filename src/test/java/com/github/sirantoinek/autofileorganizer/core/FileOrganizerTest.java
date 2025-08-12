@@ -44,8 +44,8 @@ class FileOrganizerTest
         Files.createFile(tempDir.resolve("text.txt"));
 
         YearMonth modifyDate = YearMonth.parse(FileAnalyzer.getFileModifyDate(tempDir.resolve("text.txt")));
-        String year = String.valueOf(modifyDate.getYear());
-        String month = String.valueOf(modifyDate.getMonthValue());
+        String year = String.format("%04d", modifyDate.getYear());
+        String month = String.format("%02d", modifyDate.getMonthValue());
 
         int filesOrganized = FileOrganizer.organizeDirectory(tempDir.toString(), false, true, false);
 
@@ -59,8 +59,8 @@ class FileOrganizerTest
         Files.createFile(tempDir.resolve("image.png"));
 
         YearMonth modifyDate = YearMonth.parse(FileAnalyzer.getFileModifyDate(tempDir.resolve("image.png")));
-        String year = String.valueOf(modifyDate.getYear());
-        String month = String.valueOf(modifyDate.getMonthValue());
+        String year = String.format("%04d", modifyDate.getYear());
+        String month = String.format("%02d", modifyDate.getMonthValue());
 
         int filesOrganized = FileOrganizer.organizeDirectory(tempDir.toString(), true, true, false);
 

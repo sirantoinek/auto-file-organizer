@@ -47,6 +47,10 @@ public class Constants
             "exe", "dll", "msi", "bat", "cmd", "com", "scr", "sys", "elf", "app", "jar", "apk", "ipa"
     );
 
+    public static final Set<String> VALID_FLAGS = Set.of(
+            "--by-type", "--by-date", "--recursive", "--auto", "--undo", "--help"
+    );
+
     // blacklist of folders to ignore in FileUtils.listFiles() (used in FileScanner)
     public static final IOFileFilter DIRECTORY_BLACKLIST = new NotFileFilter(
             new OrFileFilter(

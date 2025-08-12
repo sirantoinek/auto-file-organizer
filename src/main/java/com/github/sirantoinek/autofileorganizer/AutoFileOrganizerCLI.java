@@ -1,11 +1,22 @@
 package com.github.sirantoinek.autofileorganizer;
 
+import com.github.sirantoinek.autofileorganizer.core.FileOrganizer;
+import com.github.sirantoinek.autofileorganizer.util.Constants;
+import java.io.IOException;
+
 // Handles CLI args and calls necessary functionality.
 public class AutoFileOrganizerCLI
 {
-    public static void main(String[] args)
+    public static void main(String[] args) throws IOException
     {
-        if (args.length == 0 || args[0].equals("--help"))
+        String invalidFlag = hasInvalidFlag(args);
+        if (invalidFlag != null)
+        {
+            printInvalidFlagError(invalidFlag);
+            return;
+        }
+
+        if (args.length == 0 || hasFlag(args, "--help"))
         {
             printHelp();
             return;
@@ -14,12 +25,11 @@ public class AutoFileOrganizerCLI
         if (args[0].equals("--undo"))
         {
             // TODO: add undo feature
+            //       possible ask for user confirmation?
             return;
         }
 
-        // TODO: add validity check for folder-path
-
-        boolean byType = hasFlag(args, "--by-type") || args.length == 1; // default sorting method
+        boolean byType = hasFlag(args, "--by-type") || !hasFlag(args, "--by-date"); // default sorting method
         boolean byDate = hasFlag(args, "--by-date");
         boolean recursive = hasFlag(args, "--recursive");
 
@@ -29,10 +39,9 @@ public class AutoFileOrganizerCLI
             return;
         }
 
-        // TODO: add file organization using (args[0] folderPath, byType, byDate, recursive)
+        int filesOrganized = FileOrganizer.organizeDirectory(args[0], byType, byDate, recursive); // args[0] = folderPath
 
-        // temporary log for testing
-        System.out.println("Organize: " + args[0] + " byType: " + byType + " byDate: " + byDate + " recursive: " + recursive);
+        printSummary(filesOrganized, args[0], byType, byDate, recursive);
     }
 
     private static boolean hasFlag(String[] args, String flag)
@@ -41,11 +50,23 @@ public class AutoFileOrganizerCLI
         return false;
     }
 
+    private static String hasInvalidFlag(String[] args)
+    {
+        for (int i = 1; i < args.length; i++) if (!Constants.VALID_FLAGS.contains(args[i])) return args[i];
+        return null;
+    }
+
+    private static void printInvalidFlagError(String invalidFlag)
+    {
+        System.err.println("Error: Unrecognized flag '" + invalidFlag + "'.");
+        System.err.println("Use --help to see the list of valid flags.");
+    }
+
     private static void printHelp()
     {
         System.out.println("File Organizer v0.2.0");
         System.out.println("Usage:");
-        System.out.println("  java -jar auto-file-organizer.jar [flags] <folder-path>");
+        System.out.println("  java -jar auto-file-organizer.jar <folder-path> [flags]");
         System.out.println("\nFlags:");
         System.out.println("  --by-type      Organize by file type (default)");
         System.out.println("  --by-date      Organize by date (year/month)");
@@ -55,7 +76,19 @@ public class AutoFileOrganizerCLI
         System.out.println("  --help         Show this help message");
         System.out.println("\nExamples:");
         System.out.println("  java -jar auto-file-organizer.jar \"C:\\Users\\User\\Downloads\"");
-        System.out.println("  java -jar auto-file-organizer.jar --by-type --by-date \"C:\\Users\\User\\Downloads\"");
+        System.out.println("  java -jar auto-file-organizer.jar \"C:\\Users\\User\\Downloads\" --by-type --by-date");
         System.out.println("  java -jar auto-file-organizer.jar --undo");
+    }
+
+    private static void printSummary(int filesOrganized, String folderPath, boolean byType, boolean byDate, boolean recursive)
+    {
+        System.out.printf(
+                "Organized %d file%s in \"%s\" %s using %s organization.%n",
+                filesOrganized,
+                filesOrganized == 1 ? "" : "s",
+                folderPath,
+                (byType && byDate) ? "by type and date" : byType ? "by type" : "by date",
+                recursive ? "recursive" : "shallow"
+        );
     }
 }
