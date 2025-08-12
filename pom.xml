@@ -6,7 +6,7 @@
 
     <groupId>com.github.sirantoinek</groupId>
     <artifactId>auto-file-organizer</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
 
     <name>auto-file-organizer</name>
     <description>Command-line tool to automatically sort files by type and/or date</description>

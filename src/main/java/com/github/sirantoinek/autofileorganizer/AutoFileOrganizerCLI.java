@@ -64,7 +64,7 @@ public class AutoFileOrganizerCLI
 
     private static void printHelp()
     {
-        System.out.println("File Organizer v0.2.0");
+        System.out.println("File Organizer v0.3.0");
         System.out.println("Usage:");
         System.out.println("  java -jar auto-file-organizer.jar <folder-path> [flags]");
         System.out.println("\nFlags:");
