@@ -51,7 +51,6 @@ public class Constants
     public static final IOFileFilter DIRECTORY_BLACKLIST = new NotFileFilter(
             new OrFileFilter(
                     new PrefixFileFilter("."), // Unix hidden folders
-                    new NameFileFilter("Organized", IOCase.INSENSITIVE), // Organized folder
                     new NameFileFilter("$Recycle.Bin", IOCase.INSENSITIVE),
                     new NameFileFilter("Program Files", IOCase.INSENSITIVE),
                     new NameFileFilter("Program Files (x86)", IOCase.INSENSITIVE),

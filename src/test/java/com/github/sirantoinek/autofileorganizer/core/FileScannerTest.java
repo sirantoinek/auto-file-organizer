@@ -25,7 +25,7 @@ class FileScannerTest
         Files.createDirectories(subDir);
         Files.createFile(subDir.resolve("nestedFile.pdf"));
 
-        Path blacklistedDir = tempDir.resolve("Organized");
+        Path blacklistedDir = tempDir.resolve("AppData");
         Files.createDirectories(blacklistedDir);
         Files.createFile(blacklistedDir.resolve("ignored.docx"));
 

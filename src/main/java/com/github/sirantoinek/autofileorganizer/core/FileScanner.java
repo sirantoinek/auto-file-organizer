@@ -14,8 +14,7 @@ public class FileScanner
 {
     public static List<Path> scanDirectoryRecursive(Path folderPath)
     {
-        File directory = folderPath.toFile();
-        Collection<File> files = FileUtils.listFiles(directory, TrueFileFilter.INSTANCE, Constants.DIRECTORY_BLACKLIST);
+        Collection<File> files = FileUtils.listFiles(folderPath.toFile(), TrueFileFilter.INSTANCE, Constants.DIRECTORY_BLACKLIST);
 
         List<Path> fileList = new ArrayList<>();
         for (File file : files) fileList.add(file.toPath());
@@ -25,8 +24,7 @@ public class FileScanner
 
     public static List<Path> scanDirectoryShallow(Path folderPath)
     {
-        File directory = folderPath.toFile();
-        Collection<File> files = FileUtils.listFiles(directory, TrueFileFilter.INSTANCE, null); // no recursion
+        Collection<File> files = FileUtils.listFiles(folderPath.toFile(), TrueFileFilter.INSTANCE, null); // no recursion
 
         List<Path> fileList = new ArrayList<>();
         for (File file : files) fileList.add(file.toPath());

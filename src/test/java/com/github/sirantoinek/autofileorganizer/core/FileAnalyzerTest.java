@@ -43,19 +43,19 @@ class FileAnalyzerTest
         try
         {
             // Because date is in middle of month, user timezone will not change expected yyyy-MM result.
-            FileTime modifyTime1 = java.nio.file.attribute.FileTime.fromMillis(1626307200000L); // July 15, 2021
-            java.nio.file.Files.setLastModifiedTime(tempFile, modifyTime1);
+            FileTime modifyTime = java.nio.file.attribute.FileTime.fromMillis(1626307200000L); // July 15, 2021
+            java.nio.file.Files.setLastModifiedTime(tempFile, modifyTime);
 
-            String modifyDate1 = FileAnalyzer.getFileModifyDate(tempFile);
+            String modifyDate = FileAnalyzer.getFileModifyDate(tempFile);
 
-            assertEquals("2021-07", modifyDate1);
+            assertEquals("2021-07", modifyDate);
 
-            FileTime modifyTime2 = java.nio.file.attribute.FileTime.fromMillis(1673740800000L); // January 15, 2023
-            java.nio.file.Files.setLastModifiedTime(tempFile, modifyTime2);
+            modifyTime = java.nio.file.attribute.FileTime.fromMillis(1673740800000L); // January 15, 2023
+            java.nio.file.Files.setLastModifiedTime(tempFile, modifyTime);
 
-            String modifyDate2 = FileAnalyzer.getFileModifyDate(tempFile);
+            modifyDate = FileAnalyzer.getFileModifyDate(tempFile);
 
-            assertEquals("2023-01", modifyDate2);
+            assertEquals("2023-01", modifyDate);
         }
         finally
         {
