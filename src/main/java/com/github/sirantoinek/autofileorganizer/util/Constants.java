@@ -10,8 +10,16 @@ public class Constants
 {
     private Constants() {}
 
-    // Date format
+    // Date format for file organization
     public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM");
+
+    // Date format for logging auto run time
+    public static final DateTimeFormatter AUTO_RUN_DATE_FORMAT = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+
+    // Interval between auto runs in days
+    public static final int DAYS_BETWEEN_AUTO_RUN = 7;
+
+    public static final String LAST_RUN_FILE_NAME = "auto-file-organizer-last-run.txt";
 
     // Folder names
     public static final String DOCUMENTS_FOLDER = "Documents";

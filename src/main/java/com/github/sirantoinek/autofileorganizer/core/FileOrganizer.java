@@ -35,7 +35,7 @@ public class FileOrganizer
             }
             catch (Exception e)
             {
-                System.err.println("Failed to organize \"" + file + "\".");
+                System.err.println("Failed to organize \"" + file + "\": " + e.getMessage());
             }
         }
         return filesOrganized;

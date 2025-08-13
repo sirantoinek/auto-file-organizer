@@ -1,5 +1,6 @@
 package com.github.sirantoinek.autofileorganizer;
 
+import com.github.sirantoinek.autofileorganizer.core.AutoRunManager;
 import com.github.sirantoinek.autofileorganizer.core.FileOrganizer;
 import com.github.sirantoinek.autofileorganizer.util.Constants;
 import java.io.IOException;
@@ -33,15 +34,21 @@ public class AutoFileOrganizerCLI
         boolean byDate = hasFlag(args, "--by-date");
         boolean recursive = hasFlag(args, "--recursive");
 
-        if (hasFlag(args, "--auto"))
+        if (hasFlag(args, "--auto") && !AutoRunManager.shouldAutoRun())
         {
-            // TODO: add auto feature
-            return;
+            return; // Skip auto organization if it shouldn't run.
         }
 
         int filesOrganized = FileOrganizer.organizeDirectory(args[0], byType, byDate, recursive); // args[0] = folderPath
+        String summary = returnSummary(filesOrganized, args[0], byType, byDate, recursive);
 
-        printSummary(filesOrganized, args[0], byType, byDate, recursive);
+        if (hasFlag(args, "--auto"))
+        {
+            AutoRunManager.recordAutoRun(summary);
+            return;
+        }
+
+        System.out.print(summary);
     }
 
     private static boolean hasFlag(String[] args, String flag)
@@ -80,9 +87,9 @@ public class AutoFileOrganizerCLI
         System.out.println("  java -jar auto-file-organizer.jar --undo");
     }
 
-    private static void printSummary(int filesOrganized, String folderPath, boolean byType, boolean byDate, boolean recursive)
+    private static String returnSummary(int filesOrganized, String folderPath, boolean byType, boolean byDate, boolean recursive)
     {
-        System.out.printf(
+        return String.format(
                 "Organized %d file%s in \"%s\" %s using %s organization.%n",
                 filesOrganized,
                 filesOrganized == 1 ? "" : "s",
