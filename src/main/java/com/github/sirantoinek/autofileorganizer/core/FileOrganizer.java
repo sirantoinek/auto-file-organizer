@@ -1,5 +1,6 @@
 package com.github.sirantoinek.autofileorganizer.core;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import java.io.IOException;
 import java.nio.file.*;
@@ -38,6 +39,22 @@ public class FileOrganizer
                 System.err.println("Failed to organize \"" + file + "\": " + e.getMessage());
             }
         }
+
+        // Scan all subfolders within organizedDir for deletion of empty subfolders (keeps organizedDir clean).
+        List<Path> subfolders = FileScanner.scanSubfolders(organizedDir);
+
+        for (Path subFolder : subfolders)
+        {
+            try
+            {
+                if (FileUtils.isEmptyDirectory(subFolder.toFile())) FileUtils.deleteDirectory(subFolder.toFile());
+            }
+            catch (Exception e)
+            {
+                System.err.println("Failed to delete empty folder \"" + subFolder + "\" from ...\\Organized: " + e.getMessage());
+            }
+        }
+
         return filesOrganized;
     }
 

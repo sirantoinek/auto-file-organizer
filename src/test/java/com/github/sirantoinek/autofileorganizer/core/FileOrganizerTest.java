@@ -122,6 +122,29 @@ class FileOrganizerTest
     }
 
     @Test
+    void testOrganizeWithEmptyFoldersInOrganized() throws IOException
+    {
+        // Empty folder
+        Path organizedAudio = Files.createDirectories(tempDir.resolve("Organized").resolve(Constants.AUDIO_FOLDER));
+
+        Path organizedVideos = Files.createDirectories(tempDir.resolve("Organized").resolve(Constants.VIDEOS_FOLDER));
+        Files.createFile(organizedVideos.resolve("movie.mp4"));
+        Files.createFile(organizedVideos.resolve("video.mkv"));
+
+        Files.createFile(tempDir.resolve("unorganized.txt"));
+        Files.createFile(tempDir.resolve("unorganized.pdf"));
+
+        int filesOrganized = FileOrganizer.organizeDirectory(tempDir.toString(), true, false, true);
+
+        assertEquals(2, filesOrganized);
+        assertTrue(Files.exists(tempDir.resolve("Organized").resolve(Constants.DOCUMENTS_FOLDER).resolve("unorganized.txt")));
+        assertTrue(Files.exists(tempDir.resolve("Organized").resolve(Constants.DOCUMENTS_FOLDER).resolve("unorganized.pdf")));
+        assertTrue(Files.exists(organizedVideos.resolve("movie.mp4")));
+        assertTrue(Files.exists(organizedVideos.resolve("video.mkv")));
+        assertFalse(Files.exists(organizedAudio));
+    }
+
+    @Test
     void testOrganizeWithMissingDirectory()
     {
         assertThrows(IllegalArgumentException.class, () -> FileOrganizer.organizeDirectory("/missing/path", true, false, false));

@@ -73,6 +73,35 @@ class FileScannerTest
         assertTrue(fileList.isEmpty());
     }
 
+    @Test
+    void testScanSubfolders() throws IOException {
+        Path emptyFolder1 = tempDir.resolve("EmptyFolder1");
+        Files.createDirectories(emptyFolder1);
+
+        Path emptyFolder2 = tempDir.resolve("EmptyFolder2");
+        Path emptySubfolder1 = emptyFolder2.resolve("EmptySubfolder1");
+        Files.createDirectories(emptyFolder2);
+        Files.createDirectories(emptySubfolder1);
+
+        Path notEmptyFolder = tempDir.resolve("NotEmptyFolder");
+        Path emptySubfolder2 = notEmptyFolder.resolve("EmptySubfolder2");
+        Files.createDirectories(notEmptyFolder);
+        Files.createFile(notEmptyFolder.resolve("file.txt"));
+        Files.createDirectories(emptySubfolder2);
+
+        List<Path> emptySubfolders = FileScanner.scanSubfolders(tempDir);
+
+        assertEquals(5, emptySubfolders.size());
+        assertTrue(emptySubfolders.contains(emptyFolder1));
+        assertTrue(emptySubfolders.contains(emptyFolder2));
+        assertTrue(emptySubfolders.contains(emptySubfolder1));
+        assertTrue(emptySubfolders.contains(emptySubfolder2));
+        assertTrue(emptySubfolders.contains(notEmptyFolder));
+        assertFalse(emptySubfolders.contains(tempDir));
+        assertFalse(containsFileName(emptySubfolders, "file.txt"));
+    }
+
+
     private boolean containsFileName(List<Path> fileList, String fileName)
     {
         for (Path file : fileList)
