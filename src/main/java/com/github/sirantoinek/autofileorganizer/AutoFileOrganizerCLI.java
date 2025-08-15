@@ -2,6 +2,7 @@ package com.github.sirantoinek.autofileorganizer;
 
 import com.github.sirantoinek.autofileorganizer.core.AutoRunManager;
 import com.github.sirantoinek.autofileorganizer.core.FileOrganizer;
+import com.github.sirantoinek.autofileorganizer.core.UndoManager;
 import com.github.sirantoinek.autofileorganizer.util.Constants;
 import java.io.IOException;
 
@@ -23,10 +24,22 @@ public class AutoFileOrganizerCLI
             return;
         }
 
-        if (args[0].equals("--undo"))
+        boolean auto = hasFlag(args, "--auto");
+
+        if (auto && !AutoRunManager.shouldAutoRun())
         {
-            // TODO: add undo feature
-            //       possible ask for user confirmation?
+            return; // Skip auto organization if it shouldn't run.
+        }
+
+        if (hasFlag(args, "--undo"))
+        {
+            boolean undoSucceeded = handleUndo();
+
+            if (auto)
+            {
+                String summary = undoSucceeded ? "Undo complete. Last organization run has been reverted." : "Failed to undo the last organization run.";
+                AutoRunManager.recordAutoRun(summary);
+            }
             return;
         }
 
@@ -34,15 +47,10 @@ public class AutoFileOrganizerCLI
         boolean byDate = hasFlag(args, "--by-date");
         boolean recursive = hasFlag(args, "--recursive");
 
-        if (hasFlag(args, "--auto") && !AutoRunManager.shouldAutoRun())
-        {
-            return; // Skip auto organization if it shouldn't run.
-        }
-
         int filesOrganized = FileOrganizer.organizeDirectory(args[0], byType, byDate, recursive); // args[0] = folderPath
         String summary = returnSummary(filesOrganized, args[0], byType, byDate, recursive);
 
-        if (hasFlag(args, "--auto"))
+        if (auto)
         {
             AutoRunManager.recordAutoRun(summary);
             return;
@@ -61,6 +69,26 @@ public class AutoFileOrganizerCLI
     {
         for (int i = 1; i < args.length; i++) if (!Constants.VALID_FLAGS.contains(args[i])) return args[i];
         return null;
+    }
+
+    private static boolean handleUndo()
+    {
+        java.util.Scanner scanner = new java.util.Scanner(System.in);
+        String input;
+        do
+        {
+            System.out.print("Are you sure you want to undo the last organization run? (y/n): ");
+            input = scanner.nextLine().trim().toLowerCase();
+        }
+        while (!input.equals("y") && !input.equals("n") && !input.equals("yes") && !input.equals("no"));
+
+        if (input.equals("y") || input.equals("yes"))
+        {
+            return UndoManager.undoLastRun();
+        }
+
+        System.out.println("Undo cancelled.");
+        return false;
     }
 
     private static void printInvalidFlagError(String invalidFlag)

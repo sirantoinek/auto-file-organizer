@@ -18,13 +18,18 @@ public class FileOrganizer
         {
             throw new IllegalArgumentException("Source path must be a valid directory");
         }
+        UndoManager.deleteLogFile(); // Clear undo log file before starting new organization run.
 
         // Scan files to be organized. Shallow is default unless --recursive flag was set.
         List<Path> files = recursive ? FileScanner.scanDirectoryRecursive(sourceDir) : FileScanner.scanDirectoryShallow(sourceDir);
 
         // Create organized folder.
         Path organizedDir = sourceDir.resolve("Organized");
-        Files.createDirectories(organizedDir);
+        if (!Files.exists(organizedDir))
+        {
+            Files.createDirectories(organizedDir);
+            UndoManager.logCreateFolder(organizedDir);
+        }
 
         int filesOrganized = 0;
         for (Path file : files)
@@ -47,7 +52,11 @@ public class FileOrganizer
         {
             try
             {
-                if (FileUtils.isEmptyDirectory(subFolder.toFile())) FileUtils.deleteDirectory(subFolder.toFile());
+                if (FileUtils.isEmptyDirectory(subFolder.toFile()))
+                {
+                    FileUtils.deleteDirectory(subFolder.toFile());
+                    UndoManager.logDeleteFolder(subFolder);
+                }
             }
             catch (Exception e)
             {
@@ -84,6 +93,7 @@ public class FileOrganizer
         }
 
         Files.move(file, organizedPath);
+        UndoManager.logMoveFile(file, organizedPath);
         return true;
     }
 
@@ -100,13 +110,20 @@ public class FileOrganizer
             String year = String.format("%04d", modifyDate.getYear());
             String month = String.format("%02d", modifyDate.getMonthValue());
 
-            targetDir = targetDir.resolve(year).resolve(month);
+            // Log folders that will be created.
+            targetDir = targetDir.resolve(year);
+            if (!Files.exists(targetDir)) UndoManager.logCreateFolder(targetDir);
+            targetDir = targetDir.resolve(month);
+            if (!Files.exists(targetDir)) UndoManager.logCreateFolder(targetDir);
         }
 
         if (byType)
         {
             String fileCategory = FileAnalyzer.getFileCategory(file);
+
+            // Log folders that will be created.
             targetDir = targetDir.resolve(fileCategory);
+            if (!Files.exists(targetDir)) UndoManager.logCreateFolder(targetDir);
         }
 
         return targetDir.resolve(file.getFileName());

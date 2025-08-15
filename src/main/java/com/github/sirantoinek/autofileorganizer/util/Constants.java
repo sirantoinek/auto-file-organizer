@@ -20,6 +20,7 @@ public class Constants
     public static final int DAYS_BETWEEN_AUTO_RUN = 7;
 
     public static final String LAST_RUN_FILE_NAME = "auto-file-organizer-last-run.txt";
+    public static final String UNDO_LOG_FILE_NAME = "auto-file-organizer-undo-log.txt";
 
     // Folder names
     public static final String DOCUMENTS_FOLDER = "Documents";
