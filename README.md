@@ -20,13 +20,13 @@ A command-line tool to automatically sort files into a structured directory base
 
 
 2. Download:
-    - The `.jar` file (`auto-file-organizer-x.x.x.jar`)
+    - The `.jar` file (`auto-file-organizer-x.y.z.jar`)
     - The `auto-file-organizer-startup.bat` file (Windows only, optional but recommended)
 
 
 3. Decide how to run the application:
-   - Option A: [Auto startup using the batch file (Windows only)](#automated-execution-on-windows)
-   - Option B: [Run manually in the terminal](#usage)
+    - Option A: [Auto startup using the batch file (Windows only)](#automated-execution-on-windows-)
+    - Option B: [Run manually in the terminal](#usage-)
 
 ### Option 2: Build from Source
 *(for developers or if you want the latest changes)*
@@ -35,29 +35,29 @@ A command-line tool to automatically sort files into a structured directory base
     git clone https://github.com/sirantoinek/auto-file-organizer.git
     cd auto-file-organizer
     ```
-    
+
 
 2.  Build the project using Maven. This will create a runnable JAR file with all dependencies included.
     ```sh
     mvn clean package
     ```
-    The JAR file will be located in the `target/` directory (e.g., `target/auto-file-organizer-x.x.x.jar`).
+    The JAR file will be located in the `target/` directory (e.g., `target/auto-file-organizer-x.y.z.jar`).
 
     The optional `auto-file-organizer-startup.bat` will be located in the `startup/windows/` directory.
 
 
 3. Decide how to run the application:
-    - Option A: [Auto startup using the batch file (Windows only)](#automated-execution-on-windows)
-    - Option B: [Run manually in the terminal](#usage)
+    - Option A: [Auto startup using the batch file (Windows only)](#automated-execution-on-windows-)
+    - Option B: [Run manually in the terminal](#usage-)
 ## Usage 💻
 
 Run the application from your terminal using the following format:
 
 ```sh
-java -jar auto-file-organizer-x.x.x.jar <folder-path> [flags]
+java -jar auto-file-organizer-x.y.z.jar <folder-path> [flags]
 ```
 - **Note:** When running from the terminal, make sure you are in the same directory as the `.jar`
-  or specify its full path. (Also replace x.x.x with the current version number).
+  or specify its full path. (Also replace x.y.z with the current version number).
 
 ### Arguments
 
@@ -65,49 +65,49 @@ java -jar auto-file-organizer-x.x.x.jar <folder-path> [flags]
 
 ### Flags
 
-| Flag          | Description                                                                                                                                |
-|---------------|--------------------------------------------------------------------------------------------------------------------------------------------|
-| `--by-type`   | Organizes files by their type into category folders (e.g., `Documents`, `Images`). (This is the default method).                           |
-| `--by-date`   | Organizes files by their last modified date into a `YYYY/MM` structure.                                                                    |
-| `--recursive` | Scans and organizes files in the target directory and all its subdirectories. (Only the top-level is organzied by default).                |
-| `--undo`      | Reverts the last organization operation. Prompts for confirmation before proceeding.                                                       |
-| `--auto`      | Enables automatic mode for scheduled tasks. The tool will only run if a set interval (default: 7 days) has passed since the last auto-run. |
-| `--help`      | Displays the help message with usage instructions and a list of flags.                                                                     |
+| Flag          | Description                                                                                                                      |
+|---------------|----------------------------------------------------------------------------------------------------------------------------------|
+| `--by-type`   | Organizes files by their type into category folders (e.g., `Documents`, `Images`). <br/>(This is the default method).            |
+| `--by-date`   | Organizes files by their last modified date into a `YYYY/MM` structure.                                                          |
+| `--recursive` | Scans and organizes files in the target directory and all its subdirectories. <br/>(Only the top-level is organzied by default). |
+| `--undo`      | Reverts the last organization operation. Prompts for confirmation before proceeding.                                             |
+| `--auto`      | Enables auto mode, running only if the set interval (default: 7 days) <br/>has passed since the last auto run.                   |
+| `--help`      | Displays the help message with usage instructions and a list of flags.                                                           |
 
 ### Examples
 
 -   **Organize the Downloads folder by file type (shallow) (default):**
     ```sh
-    java -jar auto-file-organizer-0.5.0.jar "C:\Users\YourUser\Downloads"
+    java -jar auto-file-organizer-x.y.z.jar "C:\Users\YourUser\Downloads"
     ```
 
 -   **Organize the Downloads folder by both type and date (shallow):**
     ```sh
-    java -jar auto-file-organizer-0.5.0.jar "C:\Users\YourUser\Downloads" --by-type --by-date
+    java -jar auto-file-organizer-x.y.z.jar "C:\Users\YourUser\Downloads" --by-type --by-date
     ```
 -   **Organize a folder by date only (recursive):**
     ```sh
-    java -jar auto-file-organizer-0.5.0.jar "/path/to/your/folder" --by-date --recursive
+    java -jar auto-file-organizer-x.y.z.jar "/path/to/your/folder" --by-date --recursive
     ```
 
 -   **Undo the last organization run:**
     ```sh
-    java -jar auto-file-organizer-0.5.0.jar --undo
+    java -jar auto-file-organizer-x.y.z.jar --undo
     ```
 
 ### File Type Categories
 
-| Category | Extensions                                                          |
-|----------|---------------------------------------------------------------------|
-| **Documents** | csv, doc, docx, ods, odt, odp, pdf, ppt, pptx, rtf, txt, xls, xlsx  |
-| **Images** | bmp, gif, heic, heif, ico, jpg, jpeg, png, svg, tif, tiff, webp     |
-| **Videos** | avi, flv, m4v, mkv, mov, mp4, qt, webm, wmv                         |
-| **Audio** | aac, aiff, alac, m4a, mp3, opus, ogg, flac, wav, wma                |
-| **Archives** | 7z, bz2, dmg, gz, iso, rar, tar, zip                                |
-| **Executables** | apk, app, bat, cmd, com, dll, elf, exe, ipa, jar, msi, scr, sh, sys |
+| Category          | Extensions                                                          |
+|-------------------|---------------------------------------------------------------------|
+| **Documents**     | csv, doc, docx, ods, odt, odp, pdf, ppt, pptx, rtf, txt, xls, xlsx  |
+| **Images**        | bmp, gif, heic, heif, ico, jpg, jpeg, png, svg, tif, tiff, webp     |
+| **Videos**        | avi, flv, m4v, mkv, mov, mp4, qt, webm, wmv                         |
+| **Audio**         | aac, aiff, alac, m4a, mp3, opus, ogg, flac, wav, wma                |
+| **Archives**      | 7z, bz2, dmg, gz, iso, rar, tar, zip                                |
+| **Executables**   | apk, app, bat, cmd, com, dll, elf, exe, ipa, jar, msi, scr, sh, sys |
 | **Miscellaneous** | Everything else                                                     |
 
-## Automated Execution on Windows ⚙️
+## Automated Execution on Windows ⚡
 
 You can configure the tool to run automatically on Windows startup using the provided `.bat` script.
 
@@ -115,7 +115,7 @@ You can configure the tool to run automatically on Windows startup using the pro
 
 
 2.  **Modify the variables:**
-    -   `JAR_PATH`: Set this to the absolute path of your `auto-file-organizer-x.x.x.jar` file.
+    -   `JAR_PATH`: Set this to the absolute path of your `auto-file-organizer-x.y.z.jar` file.
     -   `ORGANIZE_FOLDER`: Set this to the absolute path of the folder you want to organize automatically.
     -   `FLAGS`: Set any desired organization flags (e.g., `--by-type`, `--recursive`).
 
@@ -139,7 +139,7 @@ This interval can be configured in `src/main/java/com/github/sirantoinek/autofil
 - **Auto Run Manager**: When using the `--auto` flag, the tool checks for an `auto-file-organizer-last-run.txt` file in your user home directory. It compares the date of the last run with the current date to decide if it should proceed with the organization.
 
 ## License 📄
-This project is licensed under the MIT License. See the [LICENSE](#license) file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Third-Party Licenses 📦📄
 
