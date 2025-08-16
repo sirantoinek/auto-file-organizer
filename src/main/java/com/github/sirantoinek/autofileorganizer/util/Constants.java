@@ -33,27 +33,27 @@ public class Constants
 
     // File extensions by file type
     public static final Set<String> DOCUMENT_EXTENSIONS = Set.of(
-            "pdf", "doc", "docx", "odt", "txt", "rtf", "xls", "xlsx", "ods", "ppt", "pptx", "odp", "csv"
+            "csv", "doc", "docx", "ods", "odt", "odp", "pdf", "ppt", "pptx", "rtf", "txt", "xls", "xlsx"
     );
 
     public static final Set<String> IMAGE_EXTENSIONS = Set.of(
-            "jpg", "jpeg", "png", "gif", "bmp", "svg", "webp", "ico", "tiff", "tif", "heif", "heic"
+            "bmp", "gif", "heic", "heif", "ico", "jpg", "jpeg", "png", "svg", "tiff", "tif", "webp"
     );
 
     public static final Set<String> VIDEO_EXTENSIONS = Set.of(
-            "mp4", "avi", "mov", "qt", "wmv", "mkv", "webm", "flv", "m4v"
+            "avi", "flv", "m4v", "mkv", "mov", "mp4", "qt", "webm", "wmv"
     );
 
     public static final Set<String> AUDIO_EXTENSIONS = Set.of(
-            "mp3", "wav", "flac", "aac", "ogg", "wma", "m4a", "alac", "aiff"
+            "aac", "aiff", "alac", "m4a", "mp3", "opus", "ogg", "flac", "wav", "wma"
     );
 
     public static final Set<String> ARCHIVE_EXTENSIONS = Set.of(
-            "zip", "rar", "7z", "tar", "gz", "bz2", "dmg", "iso"
+            "7z", "bz2", "dmg", "gz", "iso", "rar", "tar", "zip"
     );
 
     public static final Set<String> EXECUTABLE_EXTENSIONS = Set.of(
-            "exe", "dll", "msi", "bat", "cmd", "com", "scr", "sys", "elf", "app", "jar", "apk", "ipa"
+            "apk", "app", "bat", "cmd", "com", "dll", "elf", "exe", "ipa", "jar", "msi", "scr", "sh", "sys"
     );
 
     public static final Set<String> VALID_FLAGS = Set.of(
