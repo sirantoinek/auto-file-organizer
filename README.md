@@ -14,9 +14,9 @@ A command-line tool to automatically sort files into a structured directory base
 ### Option 1: Use the Prebuilt Release (Recommended)
 *(fastest way to get started)*
 
-[![Download Latest Release](https://img.shields.io/github/v/release/sirantoinek/auto-file-organizer?label=Download%20Latest%20Release&style=for-the-badge)](../../releases/latest)
-
 1. Go to the [Releases](../../releases) page.
+
+   [![Download Latest Release](https://img.shields.io/github/v/release/sirantoinek/auto-file-organizer?label=Download%20Latest%20Release&style=for-the-badge)](../../releases/latest)
 
 
 2. Download:
@@ -37,7 +37,7 @@ A command-line tool to automatically sort files into a structured directory base
     ```
 
 
-2.  Build the project using Maven. This will create a runnable JAR file with all dependencies included.
+2.  Build the project using Maven. This will create a JAR file with all dependencies included.
     ```sh
     mvn clean package
     ```
