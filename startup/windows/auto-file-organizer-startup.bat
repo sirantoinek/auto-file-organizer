@@ -4,7 +4,7 @@ rem Place this file in: %APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup.
 rem This will run Auto File Organizer automatically when Windows starts.
 
 rem Set the path to your Auto File Organizer JAR file (CHANGE THIS PATH!)
-set JAR_PATH=C:\Users\%USERNAME%\Desktop\auto-file-organizer-1.0.0.jar
+set JAR_PATH=C:\Users\%USERNAME%\Desktop\auto-file-organizer-x.y.z.jar
 
 rem Set the folder to organize (CHANGE THIS PATH!)
 set ORGANIZE_FOLDER=C:\Users\%USERNAME%\Downloads
