@@ -24,6 +24,18 @@ class FileAnalyzerTest
     }
 
     @Test
+    void testGetFileCategoryWithUppercaseExtensions()
+    {
+        assertEquals(Constants.DOCUMENTS_FOLDER, FileAnalyzer.getFileCategory(Paths.get("file.Docx")));
+        assertEquals(Constants.IMAGES_FOLDER, FileAnalyzer.getFileCategory(Paths.get("image.JPeG")));
+        assertEquals(Constants.VIDEOS_FOLDER, FileAnalyzer.getFileCategory(Paths.get("VIDEO.MP4")));
+        assertEquals(Constants.AUDIO_FOLDER, FileAnalyzer.getFileCategory(Paths.get("Sound.Mp3")));
+        assertEquals(Constants.ARCHIVES_FOLDER, FileAnalyzer.getFileCategory(Paths.get("archive.ZIP")));
+        assertEquals(Constants.EXECUTABLES_FOLDER, FileAnalyzer.getFileCategory(Paths.get("PROGRAM.EXE")));
+        assertEquals(Constants.MISC_FOLDER, FileAnalyzer.getFileCategory(Paths.get("Unknown.XYZ")));
+    }
+
+    @Test
     void testGetFileCategoryWithFullPaths()
     {
         // Ensure that using full path also works.

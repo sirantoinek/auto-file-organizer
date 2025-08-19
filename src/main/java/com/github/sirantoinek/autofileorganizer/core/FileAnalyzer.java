@@ -15,6 +15,7 @@ public class FileAnalyzer
     public static String getFileCategory(Path file)
     {
         String extension = FilenameUtils.getExtension(file.toString());
+        extension = extension.toLowerCase(); // handle uppercase characters in extension
 
         // contains() runs in avg O(1) time complexity since these sets are hash-based
         if (Constants.DOCUMENT_EXTENSIONS.contains(extension)) return Constants.DOCUMENTS_FOLDER;
