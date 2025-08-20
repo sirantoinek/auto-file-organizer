@@ -69,7 +69,7 @@ java -jar auto-file-organizer-x.y.z.jar <folder-path> [flags]
 |---------------|----------------------------------------------------------------------------------------------------------------------------------|
 | `--by-type`   | Organizes files by their type into category folders (e.g., `Documents`, `Images`). <br/>(This is the default method).            |
 | `--by-date`   | Organizes files by their last modified date into a `YYYY/MM` structure.                                                          |
-| `--recursive` | Scans and organizes files in the target directory and all its subdirectories. <br/>(Only the top-level is organzied by default). |
+| `--recursive` | Scans and organizes files in the target directory and all its subdirectories. <br/>(Only the top-level is organized by default). |
 | `--undo`      | Reverts the last organization operation. Prompts for confirmation before proceeding.                                             |
 | `--auto`      | Enables auto mode, running only if the set interval (default: 7 days) <br/>has passed since the last auto run.                   |
 | `--help`      | Displays the help message with usage instructions and a list of flags.                                                           |
